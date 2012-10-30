@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# TODO: rsync/zsync
+function ncdrop/recv() {
+  local _po=${1:-9090}
+  nc -l ${_po} | tar -xzf -
+}
+
+function ncdrop/send() {
+  local _dir=${1}
+  local _dst="${2}"
+  local _po=${3:-9090}
+  tar -czf ${_dir} | nc ${_dst} ${_po}
+}
+
+function help/ncdrop() {
+  exit 1
+}
+
+case "${1}" in
+  recv)
+    shift
+    ncdrop/recv $*
+  ;;
+  send)
+    shift
+    ncdrop/send $*
+  ;;
+  help)
+    help/ncdrop
+  ;;
+esac

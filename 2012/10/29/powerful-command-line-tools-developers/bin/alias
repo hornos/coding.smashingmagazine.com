@@ -1,0 +1,2 @@
+netgrep="ngrep -q -W byline"
+getpost='ngrep -q -W byline "^(GET|POST) .*"'
